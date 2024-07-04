@@ -1,21 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 import Navbar from './components/Navbar';
-import ProductCard from './components/ProductCard';
 import Loading from './components/Loading';
-import { ProductList } from './services/productList.service';
-import InfiniteScroll from "react-infinite-scroll-component";
-
+import { Util } from './utils/utils';
+import { ProductListService } from './services/productList.service';
+import { pages } from './utils/pages';
+import Detail from './screens/Detail';
+import List from './screens/List';
 import './App.css'
-
+import Badget from './screens/Badget';
 function App() {
   const toastRef = useRef()
-  const service = new ProductList(toastRef);
-  const [loading, setLoading] = useState(false)
-  // eslint-disable-next-line no-unused-vars
+  const service = new ProductListService(toastRef);
+  const util = new Util(toastRef)
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(pages.main)
   const [pagenation, setPagenation] = useState({
     page: 1,
     limit: 6,
-
 
   })
   const [productData, setProductData] = useState({
@@ -23,30 +24,12 @@ function App() {
     selectProduct: {}
   })
 
-  const items = [
-    {
-      label: 'Anasayfa',
-      icon: 'pi pi-home',
-      command: () => console.log("a")
-    },
-    {
-      label: 'Sepetim',
-      icon: 'pi pi-shopping-bag'
-    },
-    {
-      label: 'Profilim',
-      icon: 'pi pi-user',
 
-    },
-
-  ];
   const veriGetir = async (page, limit) => {
     setLoading(true)
-
     await service.getAllProductList(page, limit, (data) => {
       setProductData({ ...productData, allProducts: data })
       setLoading(false)
-
     })
   }
   useEffect(() => {
@@ -54,32 +37,26 @@ function App() {
     veriGetir(pagenation.page, pagenation.limit)
   }, [pagenation.limit])
 
-  const nextData = () => {
-    setPagenation({
-      ...pagenation,
-      page: pagenation.page,
-      limit: pagenation.limit + 3
 
-    })
-  }
 
   return (
     <div>
-      <Navbar items={items} productData={productData} setProductData={setProductData} />
+      <Navbar items={util.navbarItemsCreated(pages, setPage)} productData={productData} setProductData={setProductData} page={page} setPage={setPage} />
       <Loading loading={false}>
-        <InfiniteScroll
-          dataLength={productData.allProducts.length}
-          next={nextData}
-          hasMore={!loading}
-          loader={<Loading loading={true} />}
-        >
-          <div className='grid col-12 '>
+        {page === pages.main && (
+          <>
 
-            {productData?.allProducts.map((p, index) => (
-              <div className='col-6 md:col-4 xl:col-3' key={index}>  <ProductCard key={p.id} data={p} loader={false} onClick={() => console.log(p.id)} /></div>
-            ))}
-          </div>
-        </InfiniteScroll>
+            <List loading={loading} pagenation={pagenation} setPagenation={setPagenation} productData={productData} setPage={setPage} />
+          </>
+        )}
+        {page === pages.detail && (
+          <>
+            <Detail />
+          </>
+        )}
+
+        {page === pages.badget && <Badget />}
+
       </Loading>
 
 
