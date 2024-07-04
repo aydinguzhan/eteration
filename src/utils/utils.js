@@ -59,6 +59,7 @@ export class Util {
 
         return total
     }
+
     getRatingPopularty = (product) => {
         switch (product.rating) {
             case 5:
@@ -74,4 +75,5 @@ export class Util {
                 return null;
         }
     };
+
 }

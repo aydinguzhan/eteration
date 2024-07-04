@@ -18,6 +18,7 @@ export default function Badget() {
     }, []);
 
 
+
     const itemTemplate = (product, index) => {
         return (
             <div className="col-12" key={product.id}>
@@ -28,7 +29,9 @@ export default function Badget() {
                             <div className="text-2xl font-bold text-900">{product.name}</div>
                             <div className='flex gap-4'>
                                 <Rating value={product.rating} readOnly cancel={false}></Rating>
+
                                 <Tag value={product.rating} severity={util.getRatingPopularty(product)}></Tag>
+
                             </div>
                             <div className="flex align-items-center gap-3">
                                 <span className="flex align-items-center gap-2">
