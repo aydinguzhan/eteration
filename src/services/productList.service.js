@@ -20,12 +20,13 @@ export class ProductListService {
             })
             hadleSuccsessFunc(data)
         }).catch(error => {
-            console.error(error);
+            console.log(error)
         });
 
     }
 
     async getDetailProduct(id, hadleSuccsessFunc) {
+
         const url = this.mainUrl + import.meta.env.VITE_API_PRODUCTS_DISPATCH + `/${id}`
         await fetch(url).then((res) => {
             if (!res.ok) {

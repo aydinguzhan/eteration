@@ -20,9 +20,10 @@ function ProductCard({ data, loader = false, setPage }) {
         util.setCookie(data)
     }
 
-    const addId = (data) => {
-        dispatch(addProductId(data.id))
 
+
+    const addId = (data) => {
+        dispatch(addProductId(data))
 
     }
 
@@ -30,9 +31,11 @@ function ProductCard({ data, loader = false, setPage }) {
     return (
         <div className='flex flex-column border-2 border-200 border-round  gap-1 shadow-6 hover:shadow-8  '>
             <div className='flex cursor-pointer  ' onClick={() => {
-                console.log(pages.detail)
+
                 setPage(pages.detail)
                 addId(data.id)
+
+
 
             }
             }>
