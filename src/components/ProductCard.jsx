@@ -30,12 +30,13 @@ function ProductCard({ data, loader = false, setPage }) {
 
     return (
         <div className='flex flex-column border-2 border-200 border-round  gap-1 shadow-6 hover:shadow-8  '>
-            <div className='flex cursor-pointer  ' onClick={() => {
 
+
+
+
+            <div className='flex cursor-pointer' onClick={() => {
                 setPage(pages.detail)
                 addId(data.id)
-
-
 
             }
             }>
