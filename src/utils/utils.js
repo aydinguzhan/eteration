@@ -76,13 +76,6 @@ export class Util {
         }
     };
 
-    setCookie(data) {
-        const date = new Date()
-        date.setTime(date.getTime() + (24 * 60 * 60 * 1000));
-
-        document.cookie = JSON.stringify(data)
-
-    }
     getCookie() {
         const data = JSON.parse(document.cookie)
         console.log(data)

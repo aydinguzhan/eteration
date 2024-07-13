@@ -17,14 +17,13 @@ function ProductCard({ data, loader = false, setPage }) {
     const addCart = (data) => {
         setCount(count + 1);
         dispatch(addItem(data));
-        util.setCookie(data)
+
     }
 
 
 
     const addId = (data) => {
-        dispatch(addProductId(data))
-
+        dispatch(addProductId(data));
     }
 
 
@@ -37,6 +36,7 @@ function ProductCard({ data, loader = false, setPage }) {
             <div className='flex cursor-pointer' onClick={() => {
                 setPage(pages.detail)
                 addId(data.id)
+
 
             }
             }>

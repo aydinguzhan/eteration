@@ -8,9 +8,14 @@ import Detail from './screens/Detail';
 import List from './screens/List';
 import './App.css'
 import Badget from './screens/Badget';
+import { useDispatch } from 'react-redux';
+import { addLocalStoge } from './redux/reducers/badgeSlice'
+
+
 function App() {
   const toastRef = useRef()
   const service = new ProductListService(toastRef);
+  const dispatch = useDispatch();
   const util = new Util(toastRef)
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(pages.main)
@@ -26,15 +31,17 @@ function App() {
 
 
   const veriGetir = async (page, limit) => {
-    setLoading(true)
+
     await service.getAllProductList(page, limit, (data) => {
       setProductData({ ...productData, allProducts: data })
       setLoading(false)
     })
   }
   useEffect(() => {
-
+    setLoading(true)
     veriGetir(pagenation.page, pagenation.limit)
+    dispatch(addLocalStoge());
+
   }, [pagenation.limit])
 
 

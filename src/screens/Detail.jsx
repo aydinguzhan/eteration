@@ -30,9 +30,9 @@ function Detail() {
 
         <Loading loading={isLoading}>
 
-            <div className='grid col-12 flex'>
-                <div className='col-12 md:col-12  md:flex  gap-3 border-1 border-round-sm '>
-                    <div className=''>
+            <div className='grid col-12  mt-4'>
+                <div className='col-12 md:col-12  md:flex  gap-3  border-1 border-300 border-round-sm '>
+                    <div className='flex justify-content-center	 '>
                         <img src={detail?.image} alt='image' width={'100%'} className='border-round-md' />
                     </div>
                     <div className='col-12 md:col-6'>
