@@ -21,7 +21,7 @@ function ProductCard({ data, loader = false, setPage }) {
     }
 
     const addId = (data) => {
-        dispatch(addProductId(data))
+        dispatch(addProductId(data.id))
 
 
     }
