@@ -17,18 +17,23 @@ function ProductCard({ data, loader = false, setPage }) {
     const addCart = (data) => {
         setCount(count + 1);
         dispatch(addItem(data));
+        util.setCookie(data)
     }
-
 
     const addId = (data) => {
         dispatch(addProductId(data))
 
+
     }
+
+
     return (
         <div className='flex flex-column border-2 border-200 border-round  gap-1 shadow-6 hover:shadow-8  '>
             <div className='flex cursor-pointer  ' onClick={() => {
+                console.log(pages.detail)
                 setPage(pages.detail)
-                addId(data)
+                addId(data.id)
+
             }
             }>
                 <img className='border-round' width={"100%"} alt="Card" src={data?.image} />
